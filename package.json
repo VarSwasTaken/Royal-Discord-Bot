@@ -1,0 +1,23 @@
+{
+  "name": "royal_bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reg": "node ./src/register-commands.js",
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.11.0",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "googleapis": "^110.0.0",
+    "image-size": "^1.0.2",
+    "nodemon": "^2.0.20"
+  }
+}
