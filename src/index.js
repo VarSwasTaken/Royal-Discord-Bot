@@ -10,6 +10,7 @@ const client = new Client({
         GatewayIntentBits.GuildMessageTyping, 
         GatewayIntentBits.MessageContent,
     ],
+    restRequestTimeout: 600000
 });
 
 client.cooldowns = new Collection();
@@ -36,14 +37,17 @@ client.on('interactionCreate', (interaction) => {
         case 'tournament':
             commands.tournament(interaction);
         break;
-        case 'result-bo1':
+        case 'cops-result-bo1':
             commands.result_bo1(interaction);
         break;
-        case 'result-bo2':
+        case 'cops-result-bo2':
             commands.result_bo2(interaction);
         break;
-        case 'result-bo3':
+        case 'cops-result-bo3':
             commands.result_bo3(interaction);
+        break;
+        case 'cops-stats-bg':
+            commands.cops_stats_bg(interaction);
         break;
         case 'content':
             commands.content(interaction, client);

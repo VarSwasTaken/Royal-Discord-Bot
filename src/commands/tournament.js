@@ -2,7 +2,7 @@ const { createCanvas, loadImage, registerFont } = require('canvas');
 const { AttachmentBuilder } = require('discord.js');
 const path = require('path')
 
-const functions = require('../functions');
+const { applyText } = require('../functions');
 
 const tournament = async (interaction) => {
     // registering montserrat font
@@ -21,7 +21,7 @@ const tournament = async (interaction) => {
     let tournament = interaction.options.get('name').value.toUpperCase();
 
     // setting text style & placing text on the design
-    context.font = functions.applyText(canvas, tournament, 90, canvas.width - 200);
+    context.font = applyText(canvas, tournament, 90, canvas.width - 200);
     context.fillStyle = '#ffffff';
     context.textAlign = 'center';
     context.textBaseline = "middle";

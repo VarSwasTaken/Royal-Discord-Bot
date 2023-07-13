@@ -3,7 +3,7 @@ const { AttachmentBuilder } = require('discord.js');
 const sizeOf = require('image-size');
 const path = require('path');
 
-const functions = require("../functions");
+const { applyText, resizeImage } = require("../functions");
 
 const result_bo1 = async (interaction) => {
     // registering montserrat font
@@ -16,8 +16,8 @@ const result_bo1 = async (interaction) => {
 
     // loading the background and other images
     const background = await loadImage(path.resolve(__dirname, '../images/map_pictures') + '/' + interaction.options.get('map').value + '.jpg');
-    const winner_logo = functions.resizeImage(await loadImage(interaction.options.get('winner-logo').attachment.url), 1523);
-    const loser_logo = functions.resizeImage(await loadImage(interaction.options.get('loser-logo').attachment.url), 1523);
+    const winner_logo = resizeImage(await loadImage(interaction.options.get('winner-logo').attachment.url), 1523);
+    const loser_logo = resizeImage(await loadImage(interaction.options.get('loser-logo').attachment.url), 1523);
     const tournament_logo_src = path.resolve(__dirname, '../images/tournament_logos') + '/' + interaction.options.get('tournament-logo').value + '.png';
     const tournament_logo = await loadImage(tournament_logo_src);
     const rectangles = await loadImage(path.resolve(__dirname, '../images/results-rectangles.png'));
@@ -54,17 +54,17 @@ const result_bo1 = async (interaction) => {
     context.fillText('13', 1109, 1700.5);
     context.fillText(loser_rounds, canvas.width - 1109, 1700.5);
     // tournament information
-    context.font = functions.applyText(canvas, tournament_name, 30, 800);
+    context.font = applyText(canvas, tournament_name, 30, 800);
     context.fillText(tournament_name, canvas.width / 2, canvas.height / 2 - 40);
-    context.font = functions.applyText(canvas, tournament_round, 100, 800);
+    context.font = applyText(canvas, tournament_round, 100, 800);
     context.fillText(tournament_round, canvas.width / 2, canvas.height / 2 + 30);
     // team names
-    context.font = functions.applyText(canvas, winner_name, 80, 650);
+    context.font = applyText(canvas, winner_name, 80, 650);
     context.fillText(winner_name, 1109, 1480);
-    context.font = functions.applyText(canvas, loser_name, 80, 650);
+    context.font = applyText(canvas, loser_name, 80, 650);
     context.fillText(loser_name, canvas.width - 1109, 1480);
     // map
-    context.font = functions.applyText(canvas, map, 40, 800);
+    context.font = applyText(canvas, map, 40, 800);
     context.fillText(map, canvas.width / 2, canvas.height / 2 + 150);
 
     // sending the design back to the user

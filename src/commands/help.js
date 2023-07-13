@@ -9,17 +9,31 @@ const help = (interaction)  => {
 
         fields: [
             {
-                name: 'Statistical commands',
-                value: `**/stats -** _Get detailed statistics of a player (K/D Ratio, Impact & Rating)._
-                **/match-stats -** _Get detailed statistics of 5 players (K/D Ratio, Impact & Rating)._`
+                name: 'Calculation commands',
+                value: `**/stats -** _Calculate rating for a single player._
+                **/match-stats -** _Calculate rating for five players at once._`
                 .replace(/  +/g, '')
             },
             {
-                name: 'Designing commands',
-                value: `**/result-bo1 -** _Produce design of result of a Best of 1 match._
-                **/result-bo2 -** _Produce design of result of a Best of 2 match._
-                **/result-bo3 -** _Produce design of result of a Best of 3 match._
-                **/tournament -** _Produce header design with tournament name (Admin only)._`
+                name: 'Design commands (Critical Ops)',
+                value: `**/cops-result-bo1 -** _Produce design for result of a Best of 1 match._
+                **/cops-result-bo2 -** _Produce design for result of a Best of 2 match._
+                **/cops-result-bo3 -** _Produce design for result of a Best of 3 match._
+
+                **/cops-stats-bo1 -** _Produce design for stats of a Best of 1 match (Coming soon)._
+                **/cops-stats-bo2 -** _Produce design for stats of a Best of 2 match (Coming soon)._
+                **/cops-stats-bo3 -** _Produce design for stats of a Best of 3 match (Coming soon)._`
+                .replace(/  +/g, ''),
+            },
+            {
+                name: 'Design commands (Rainbow 6 Mobile)',
+                value: `**/r6-result-bo1 -** _Produce design for result of a Best of 1 match (Coming soon)._
+                **/r6-result-bo2 -** _Produce design for result of a Best of 2 match (Coming soon)_
+                **/r6-result-bo3 -** _Produce design for result of a Best of 3 match (Coming soon)._
+
+                **/r6-stats-bo1 -** _Produce design for stats of a Best of 1 match (Coming soon)._
+                **/r6-stats-bo2 -** _Produce design for stats of a Best of 2 match (Coming soon)._
+                **/r6-stats-bo3 -** _Produce design for stats of a Best of 3 match (Coming soon)._`
                 .replace(/  +/g, ''),
             }
         ],

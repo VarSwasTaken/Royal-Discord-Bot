@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+const { cops_maps, map_winner } = require('./variables')
+
 const { REST, Routes, ApplicationCommandOptionType, PermissionFlagsBits, Application } = require('discord.js');
 
 const commands = [
@@ -224,8 +226,8 @@ const commands = [
         ]
     },
     {
-        name: 'result-bo1',
-        description: 'Get the image of the result of a Best of 1 match.',
+        name: 'cops-result-bo1',
+        description: 'Get the image for result of a Best of 1 Critical Ops match.',
         options: [
             {
                 name: 'winner-name',
@@ -262,48 +264,7 @@ const commands = [
                 description: 'Map on which the game was played',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'tournament-logo',
@@ -356,8 +317,8 @@ const commands = [
         ]
     },
     {
-        name: 'result-bo2',
-        description: 'Get the image of the result of a Best of 2 match.',
+        name: 'cops-result-bo2',
+        description: 'Get the image for the result of a Best of 2 Critical Ops match.',
         options: [
             {
                 name: 'first-team-name',
@@ -388,48 +349,7 @@ const commands = [
                 description: 'First map of the match',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'map-1-winner',
@@ -458,48 +378,7 @@ const commands = [
                 description: 'Second map of the match',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'map-2-winner',
@@ -574,8 +453,8 @@ const commands = [
         ]
     },
     {
-        name: 'result-bo3',
-        description: 'Get the image of the result of a Best of 1 match.',
+        name: 'cops-result-bo3',
+        description: 'Get the image for the result of a Best of 3 Critical Ops match.',
         options: [
             {
                 name: 'winner-name',
@@ -606,64 +485,14 @@ const commands = [
                 description: 'First map of the match.',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'map-1-winner',
                 description: 'Team which won the first map',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'First team (BO3 winner)',
-                        value: 'first'
-                    },
-                    {
-                        name: 'Second team (BO3 loser)',
-                        value: 'second'
-                    }
-                ]
+                choices: map_winner
             },
             {
                 name: 'loser-1-rounds',
@@ -676,64 +505,14 @@ const commands = [
                 description: 'Second map of the match.',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'map-2-winner',
                 description: 'Team which won the second map',
                 type: ApplicationCommandOptionType.String,
                 required: true,
-                choices: [
-                    {
-                        name: 'First team (BO3 winner)',
-                        value: 'first'
-                    },
-                    {
-                        name: 'Second team (BO3 loser)',
-                        value: 'second'
-                    }
-                ]
+                choices: map_winner
             },
             {
                 name: 'loser-2-rounds',
@@ -793,48 +572,7 @@ const commands = [
                 name: 'map-3',
                 description: 'Third map of the match',
                 type: ApplicationCommandOptionType.String,
-                choices: [
-                    {
-                        name: 'Bureau',
-                        value: 'bureau'
-                    },
-                    {
-                        name: 'Canals',
-                        value: 'canals'
-                    },
-                    {
-                        name: 'Castello',
-                        value: 'castello'
-                    },
-                    {
-                        name: 'Grounded',
-                        value: 'grounded'
-                    },
-                    {
-                        name: 'Legacy',
-                        value: 'legacy'
-                    },
-                    {
-                        name: 'Plaza',
-                        value: 'plaza'
-                    },
-                    {
-                        name: 'Port',
-                        value: 'port'
-                    },
-                    {
-                        name: 'Raid',
-                        value: 'raid'
-                    },
-                    {
-                        name: 'Soar',
-                        value: 'soar'
-                    },
-                    {
-                        name: 'Village',
-                        value: 'village'
-                    }
-                ]
+                choices: cops_maps
             },
             {
                 name: 'loser-3-rounds',
@@ -842,7 +580,155 @@ const commands = [
                 type: ApplicationCommandOptionType.String
             }
         ]
-    }
+    },
+    {
+        name: 'cops-stats-bg',
+        description: 'Produce the background for stats of Critical Ops match.',
+        options: [
+            {
+                name: 'tournament-name',
+                description: 'Full name of the tournament',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'tournament-round',
+                description: 'Round of the tournament',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'tournament-logo',
+                description: 'Logo of the tournament',
+                type: ApplicationCommandOptionType.Attachment,
+                required: true,
+            },
+            {
+                name: 'winner-name',
+                description: 'Name of the winner of the match',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'winner-tag',
+                description: 'Clan tag of the winner of the match',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'winner-logo',
+                description: 'Logo of the winner of the match',
+                type: ApplicationCommandOptionType.Attachment,
+                required: true,
+            },
+            {
+                name: 'loser-name',
+                description: 'Name of the loser of the match',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'loser-tag',
+                description: 'Clan tag of the loser of the match',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'loser-logo',
+                description: 'Logo of the loser of the match',
+                type: ApplicationCommandOptionType.Attachment,
+                required: true,
+            },
+            {
+                name: 'map-1',
+                description: 'First map of the match',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+                choices: cops_maps
+            },
+            {
+                name: 'map-1-winner',
+                description: 'Team which won the first map',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+                choices: map_winner
+            },
+            {
+                name: 'map-1-loser-rounds',
+                description: 'Number of rounds won by first map loser',
+                type: ApplicationCommandOptionType.String,
+                required: true,
+            },
+            {
+                name: 'map-2',
+                description: 'Second map of the match',
+                type: ApplicationCommandOptionType.String,
+                choices: cops_maps
+            },
+            {
+                name: 'map-2-winner',
+                description: 'Team which won the second map',
+                type: ApplicationCommandOptionType.String,
+                choices: map_winner
+            },
+            {
+                name: 'map-2-loser-rounds',
+                description: 'Number of rounds won by second map loser',
+                type: ApplicationCommandOptionType.String,
+            },
+            {
+                name: 'map-3',
+                description: 'Third map of the match',
+                type: ApplicationCommandOptionType.String,
+                choices: cops_maps
+            },
+            {
+                name: 'map-3-winner',
+                description: 'Team which won the third map',
+                type: ApplicationCommandOptionType.String,
+                choices: map_winner
+            },
+            {
+                name: 'map-3-loser-rounds',
+                description: 'Number of rounds won by third map loser',
+                type: ApplicationCommandOptionType.String,
+            },
+            {
+                name: 'map-4',
+                description: 'Fourth map of the match',
+                type: ApplicationCommandOptionType.String,
+                choices: cops_maps
+            },
+            {
+                name: 'map-4-winner',
+                description: 'Team which won the fourth map',
+                type: ApplicationCommandOptionType.String,
+                choices: map_winner
+            },
+            {
+                name: 'map-4-loser-rounds',
+                description: 'Number of rounds won by fourth map loser',
+                type: ApplicationCommandOptionType.String,
+            },
+            {
+                name: 'map-5',
+                description: 'Fifth map of the match',
+                type: ApplicationCommandOptionType.String,
+                choices: cops_maps
+            },
+            {
+                name: 'map-5-winner',
+                description: 'Team which won the fifth map',
+                type: ApplicationCommandOptionType.String,
+                choices: map_winner
+            },
+            {
+                name: 'map-5-loser-rounds',
+                description: 'Number of rounds won by fifth map loser',
+                type: ApplicationCommandOptionType.String,
+            },
+        ]
+    },
 ];
 
 const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
@@ -851,7 +737,7 @@ const rest = new REST({ version: '10' }).setToken(process.env.BOT_TOKEN);
     try {
         console.log('Registering slash commands...');
         await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+            Routes.applicationCommands(process.env.CLIENT_ID),
             { body: commands }
         )
         console.log('Slash commands registered.');

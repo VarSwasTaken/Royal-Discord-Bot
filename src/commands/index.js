@@ -6,3 +6,4 @@ exports.result_bo1 = require('./result-bo1');
 exports.result_bo2 = require('./result-bo2');
 exports.result_bo3 = require('./result-bo3');
 exports.content = require('./content');
+exports.cops_stats_bg = require('./cops-stats-bg');
