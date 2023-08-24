@@ -29,25 +29,25 @@ client.on('interactionCreate', (interaction) => {
             commands.help(interaction);
         break;
         case 'stats':
-            commands.stats(interaction);
+            commands.stats.stats(interaction);
         break;
         case 'match-stats':
-            commands.match_stats(interaction);
+            commands.stats.match_stats(interaction);
         break;
         case 'tournament':
             commands.tournament(interaction);
         break;
-        case 'cops-result-bo1':
-            commands.result_bo1(interaction);
-        break;
-        case 'cops-result-bo2':
-            commands.result_bo2(interaction);
-        break;
-        case 'cops-result-bo3':
-            commands.result_bo3(interaction);
+        case 'cops-result-design':
+            commands.cops_result_design(interaction);
         break;
         case 'cops-stats-bg':
-            commands.cops_stats_bg(interaction);
+            commands.cops_stats_design.stats_bg(interaction);
+        break;
+        case 'cops-stats-fill-1':
+            commands.cops_stats_design.stats_fill_1(interaction);
+        break;
+        case 'cops-stats-fill-2':
+            commands.cops_stats_design.stats_fill_2(interaction);
         break;
         case 'content':
             commands.content(interaction, client);

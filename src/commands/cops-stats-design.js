@@ -4,46 +4,47 @@ const path = require('path');
 
 const { resizeImage } = require("../functions");
 
-const cops_stats_bg = async (interaction) => {
+const stats_bg = async (interaction) => {
     // registering fonts
     registerFont(path.resolve(__dirname, '../fonts/Carmen Sans Bold.otf'), { family: 'Carmen Sans Bold' });
     registerFont(path.resolve(__dirname, '../fonts/Carmen Sans Medium.otf'), { family: 'Carmen Sans Medium' });
     registerFont(path.resolve(__dirname, '../fonts/BebasNeue Bold.ttf'), { family: 'Bebas Neue Bold' });
     registerFont(path.resolve(__dirname, '../fonts/BebasNeuePro-BoldItalic.otf'), { family: 'Bebas Neue Bold', style: 'italic' });
-    registerFont(path.resolve(__dirname, '../fonts/Montserrat-Bold.ttf'), { family: 'Montserrat Bold' });
-    registerFont(path.resolve(__dirname, '../fonts/Montserrat-ExtraBoldItalic.ttf'), { family: 'Montserrat ExtraBold', style: 'italic' });
     
     // creating canvas
     await interaction.deferReply();
     const canvas = createCanvas(4403, 2477);
     const context = canvas.getContext('2d');
 
-    // loading the background and other images
+    // loading background and other images
     const background = await loadImage(path.resolve(__dirname, '../images/backgrounds/cops-stats-bg.jpg'));
     const tournament_logo = resizeImage(await loadImage(interaction.options.get('tournament-logo').attachment.url), 194, 194);
     const winner_logo = resizeImage(await loadImage(interaction.options.get('winner-logo').attachment.url), 215, 215);
     const loser_logo = resizeImage(await loadImage(interaction.options.get('loser-logo').attachment.url), 215, 215);
+    let random = Math.floor(Math.random() * 3) + 1;
+    const mvp_card = await loadImage(path.resolve(__dirname, `../images/backgrounds/mvp-card-${random}.png`));
 
-    // // cutting and placing images on the design
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
+    context.drawImage(mvp_card, 0, 0, canvas.width, canvas.height);
     context.drawImage(tournament_logo, 1437 + 227/2, 270 - 97);
     context.drawImage(winner_logo, 281 - 215/2, 449 - 215/2);
     context.drawImage(loser_logo, 4121 - 215/2, 449 - 215/2);
 
-    // // loading text values
+    // loading text values
     const tournament_name = interaction.options.get('tournament-name').value;
     const tournament_round = interaction.options.get('tournament-round').value;
     const winner_name = interaction.options.get('winner-name').value;
     let winner_tag = interaction.options.get('winner-tag').value;
     const loser_name = interaction.options.get('loser-name').value;
     let loser_tag = interaction.options.get('loser-tag').value;
+    const mvp = interaction.options.get('mvp').value.toUpperCase();
     let winner_score = 0;
     let loser_score = 0;
 
     if(winner_tag[0] != '[') winner_tag = '[' + winner_tag + ']';
     if(loser_tag[0] != '[') loser_tag = '[' + loser_tag + ']';
 
-    const maps = [{}]
+    let maps = [{}]
 
     for(let i=1; i<6; i++) {
         if(interaction.options.get(`map-${i}`) != null) {
@@ -70,6 +71,8 @@ const cops_stats_bg = async (interaction) => {
     context.font = '140px Carmen Sans Bold';
     context.fillText(winner_score, 1438, 679);
     context.fillText(loser_score, 2968, 679);
+    context.font = 'italic 110px Bebas Neue Bold';
+    context.fillText(mvp, canvas.width/2, 1710);
 
     context.textAlign = 'left';
     context.font = '70px Carmen Sans Bold';
@@ -86,6 +89,7 @@ const cops_stats_bg = async (interaction) => {
     context.fillText(loser_name, 4121 + 215/2, 650);
     context.font = '60px Carmen Sans Medium';
     context.fillText(loser_tag, 4121 + 215/2, 750);
+
 
     switch(maps.length) {
         case 1:
@@ -159,9 +163,91 @@ const cops_stats_bg = async (interaction) => {
         break;
     }
 
-    // sending the design back to the user
+    // sending design back to the user
     const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'tournament.png' });
     await interaction.editReply({ content: null, files: [attachment] });
 }
 
-module.exports = cops_stats_bg;
+const stats_fill_1 = async (interaction) => {
+    // registering fonts
+    registerFont(path.resolve(__dirname, '../fonts/Carmen Sans SemiBold.otf'), { family: 'Carmen Sans SemiBold' });
+    registerFont(path.resolve(__dirname, '../fonts/BebasNeue Bold.ttf'), { family: 'Bebas Neue Bold' });
+    registerFont(path.resolve(__dirname, '../fonts/BebasNeuePro-BoldItalic.otf'), { family: 'Bebas Neue Bold', style: 'italic' });
+    
+    // creating canvas
+    await interaction.deferReply();
+    const canvas = createCanvas(4403, 2477);
+    const context = canvas.getContext('2d');
+
+    // loading background
+    const background = await loadImage(interaction.options.get('background').attachment.url);
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        // filling team 1 stats
+    context.fillStyle = '#ffffff';
+    context.textBaseline = 'middle';
+    for(let i=1; i<9; i++) {
+        if(interaction.options.get(`player-${i}-name`) != null) {
+            let name = interaction.options.get(`player-${i}-name`).value;
+            let stats = interaction.options.get(`player-${i}-stats`).value;
+            let statsArr = stats.split(" ");
+            context.font = '60px Carmen Sans SemiBold';
+            context.textAlign = 'left';
+            context.fillText(name, 380 - 412/2, 1300 - 768/2 + 95*i);
+            context.font = '65px Bebas Neue Bold';
+            context.textAlign = 'center';
+            context.fillText(statsArr[0], 713, 1300 - 768/2 + 95*i)
+            context.fillText(statsArr[1], 944, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[2], 1113, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[3], 1282, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[4], 1486, 1300 - 768/2 + 95*i);
+        }
+    }
+
+    // sending design back to the user
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'tournament.png' });
+    await interaction.editReply({ content: null, files: [attachment] });
+}
+
+const stats_fill_2 = async (interaction) => {
+    // registering fonts
+    registerFont(path.resolve(__dirname, '../fonts/Carmen Sans SemiBold.otf'), { family: 'Carmen Sans SemiBold' });
+    registerFont(path.resolve(__dirname, '../fonts/BebasNeue Bold.ttf'), { family: 'Bebas Neue Bold' });
+    registerFont(path.resolve(__dirname, '../fonts/BebasNeuePro-BoldItalic.otf'), { family: 'Bebas Neue Bold', style: 'italic' });
+    
+    // creating canvas
+    await interaction.deferReply();
+    const canvas = createCanvas(4403, 2477);
+    const context = canvas.getContext('2d');
+
+    // loading background
+    const background = await loadImage(interaction.options.get('background').attachment.url);
+    context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        // filling team 1 stats
+    context.fillStyle = '#ffffff';
+    context.textBaseline = 'middle';
+    for(let i=1; i<9; i++) {
+        if(interaction.options.get(`player-${i}-name`) != null) {
+            let name = interaction.options.get(`player-${i}-name`).value;
+            let stats = interaction.options.get(`player-${i}-stats`).value;
+            let statsArr = stats.split(" ");
+            context.font = '60px Carmen Sans SemiBold';
+            context.textAlign = 'right';
+            context.fillText(name, 4013 + 412/2, 1300 - 768/2 + 95*i);
+            context.font = '65px Bebas Neue Bold';
+            context.textAlign = 'center';
+            context.fillText(statsArr[0], 3680, 1300 - 768/2 + 95*i)
+            context.fillText(statsArr[1], 3448, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[2], 3280, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[3], 3111, 1300 - 768/2 + 95*i);
+            context.fillText(statsArr[4], 2898, 1300 - 768/2 + 95*i);
+        }
+    }
+
+    // sending design back to the user
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), { name: 'tournament.png' });
+    await interaction.editReply({ content: null, files: [attachment] });
+}
+
+module.exports = { stats_bg, stats_fill_1, stats_fill_2 };

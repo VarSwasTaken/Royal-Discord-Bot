@@ -14,7 +14,7 @@ const tournament = async (interaction) => {
     const context = canvas.getContext('2d');
 
     // loading the background
-    const background = await loadImage(path.resolve(__dirname, '../images/tournaments-background.jpg'));
+    const background = await loadImage(path.resolve(__dirname, '../images/background/tournaments-background.jpg'));
     context.drawImage(background, 0, 0, canvas.width, canvas.height);
     
     // loading tournament name from the user
